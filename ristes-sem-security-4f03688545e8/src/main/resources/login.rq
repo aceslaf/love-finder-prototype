@@ -1,0 +1,4 @@
+CONSTRUCT {?s ?p ?o} WHERE {
+  ?s ?p ?o.
+FILTER((?s = <http://secuniv.finki.ukim.mk/user/__userId__>) && (?p = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> || ?p = <http://secuniv.finki.ukim.mk/vocab/user_DTYPE>)).
+}

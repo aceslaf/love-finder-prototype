@@ -1,0 +1,11 @@
+SELECT ?x ?p ?o
+WHERE 
+{
+	?x ?p ?o .  
+	?x a <http://secuniv.finki.ukim.mk/vocab/user> .
+	?x  <http://secuniv.finki.ukim.mk/vocab/user_DTYPE> "Professor" . 
+	?x <http://secuniv.finki.ukim.mk/vocab/user_faculty_id> ?f .
+	<http://secuniv.finki.ukim.mk/user/__userId__> <http://secuniv.finki.ukim.mk/vocab/user_studyProgram_id> ?sp .
+	?sp <http://secuniv.finki.ukim.mk/vocab/studyprogram_faculty_id> ?f .
+	FILTER (?p!=<http://secuniv.finki.ukim.mk/vocab/user_phone>)
+}

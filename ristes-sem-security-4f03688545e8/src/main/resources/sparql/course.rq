@@ -1,0 +1,8 @@
+SELECT ?x ?p ?o
+WHERE 
+{
+	?x ?p ?o .
+	?x a <http://secuniv.finki.ukim.mk/vocab/course> . 
+	?x ?cu <http://secuniv.finki.ukim.mk/user/__userId__> .
+	FILTER (?p!=<http://secuniv.finki.ukim.mk/vocab/course_user>)
+}

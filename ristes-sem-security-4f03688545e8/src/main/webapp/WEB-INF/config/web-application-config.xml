@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <!--http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd-->
+    
+
+    <!-- **************************************************************** -->
+    <!--  SPRING ANNOTATION PROCESSING                                    -->
+    <!-- **************************************************************** -->
+    <context:component-scan base-package="mk.ukim.finki.etnc" />
+
+    <!-- **************************************************************** -->
+    <!--  MESSAGE EXTERNALIZATION/INTERNATIONALIZATION                    -->
+    <!--  Standard Spring MessageSource implementation                    -->
+    <!-- **************************************************************** -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="Messages" />
+    </bean>
+
+    <!-- **************************************************************** -->
+    <!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
+    <!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+    <!-- **************************************************************** -->
+
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <!-- Template cache is true by default. Set to false if you want -->
+        <!-- templates to be automatically updated when modified.        -->
+        <property name="cacheable" value="true" />
+    </bean>
+    
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring3.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+   
+    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+    </bean>    
+    
+     <bean id="KeepAliveDaemon" class="mk.ukim.finki.etnc.security.spring.controller.KeepAliveDaemon" />
+     <bean id="schedulerTask" 
+        class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+              <property name="targetObject" ref="KeepAliveDaemon" />
+              <property name="targetMethod" value="prune" />
+      </bean>      
+
+      <bean id="timerTask"
+              class="org.springframework.scheduling.timer.ScheduledTimerTask">
+              <property name="timerTask" ref="schedulerTask" />
+              <property name="delay" value="1000" />
+              <property name="period" value="1000" />
+      </bean>
+   
+  
+</beans>

@@ -1,0 +1,6 @@
+SELECT ?x ?p ?o
+WHERE 
+{
+	?x ?p ?o .
+	FILTER (?x=<http://secuniv.finki.ukim.mk/user/__userId__>)
+}
