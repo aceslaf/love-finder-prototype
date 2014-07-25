@@ -16,7 +16,7 @@ public class DataBaseConstants {
     
     
 //    public static final String DB_NAME_STRING="jdbc:hsqldb:file:C:\\Users\\Aleksandar\\Documents\\NetBeansProjects\\DBS2 [aceslaf on PUBLIC]";
-//    public static final String URL = "jdbc:hsqldb:file:C:\\Users\\Aleksandar\\Documents\\NetBeansProjects\\DBS2";
+//    public static final String URL = "jdbc:hsqldb:file:C:\\Users\\Aleksandar\\Documents\\NetBeansProjects\\DBS2\\wtdf.pdf";
     
 //    
 //    public static final String USER = "aceslaf";
